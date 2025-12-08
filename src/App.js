@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+
+import { BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom";
+
+import MenuInicial from './components/pages/MenuInicial/MenuInicial';
+import AreaTrabalho from './components/pages/AreaTrabalho/AreaTrabalho';
+import CenaFinal from './components/pages/CenaFinal/CenaFinal';
+
+import Navbar from './components/layout/navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar></Navbar>
+      <Routes>
+
+        {/* Menu Inicial */}
+        <Route path='/' element={<MenuInicial></MenuInicial>}></Route>
+
+        {/* Area Inicial */}
+        <Route path='/jogar' element={<AreaTrabalho></AreaTrabalho>}></Route>
+
+        {/* Cena Final */}
+        <Route path='/final' element={<CenaFinal></CenaFinal>}></Route>
+
+      </Routes>
+    </Router>
   );
 }
 
