@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# cyber_space
+Cyber_space é um jogo interativo desenvolvido em React para ensinar conceitos de criptografia de forma prática e divertida. O jogador explora um ambiente digital futurista, enfrenta desafios baseados em cifras reais e resolve enigmas que representam técnicas usadas no mundo da segurança da informação.
+>>>>>>> 73b734714df02723a59bf0f76b208b1a508e670d
