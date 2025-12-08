@@ -1,0 +1,412 @@
+/* 
+  ================
+  MENU INICIAL CSS MODULE (Tela de Entrada)
+  ================
+*/
+
+.menu-inicial {
+  /* Fixa o menu em toda a viewport, impedindo rolagem ou deslocamento */
+  position: fixed;
+  /* shorthand para top: 0; right: 0; bottom: 0; left: 0; */
+  inset: 0; 
+
+  /* Centraliza conteúdo vertical e horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Garante altura mínima da viewport */
+  min-height: 100vh;
+  width: 100%;
+
+  /* Estética "terminal": fundo preto, texto verde (código RGB clássico #0f0) */
+  background-color: #000;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+
+  /* Impede rolagem e o "bounce" em dispositivos móveis (ex: iOS overscroll) */
+  overflow: hidden;
+  /* Desativa o comportamento de overscroll (pull-to-refresh, etc.) */
+  overscroll-behavior: none; 
+  /* Previne gestos de zoom/pinch e rolagem no touch */
+  touch-action: none; 
+
+  /* Isola camadas de pintura para evitar vazamento de efeitos (ex: blur, blend-modes) */
+  isolation: isolate;
+
+  /* Otimizações de renderização:
+     - `layout`: impede layout thrashing
+     - `style`: evita reprocessamento de estilos não relacionados
+     - `paint`: restringe repaints ao próprio elemento
+     Útil para animações intensas em elementos fixos.
+  */
+  contain: layout style paint;
+
+  /* Melhora performance em animações 3D (mesmo sem transform 3D explícito) */
+  backface-visibility: hidden;
+}
+
+/* 
+  Camada semi-transparente sobre o fundo para aumentar o contraste e dar
+  profundidade visual. Utiliza pseudo-elemento com `z-index: 1` para não
+  interferir na interação com os elementos filhos (pointer-events: none).
+*/
+.menu-inicial::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Tom escuro de verde-negro para "profundidade CRT" */
+  background: rgba(0, 5, 0, 0.75); 
+  /* Permite que cliques passem para elementos abaixo */
+  pointer-events: none; 
+  /* Sob o conteúdo (z-index: 2), mas acima do fundo (#000) */
+  z-index: 1; 
+}
+
+/* 
+  Container principal do menu.
+  Posicionado com `z-index: 2` para ficar acima da camada de escurecimento (`::after`)
+  e abaixo das scanlines (`z-index: 3`). Centralizado com margens internas responsivas.
+*/
+.menu {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 
+  LOGOTIPO
+  Estilo neon pulsante com múltiplas sombras para simular emissão de luz.
+  Animação `flicker` cria efeito de instabilidade típico de monitores antigos.
+*/
+.logo h1 {
+  font-size: 4rem;
+  margin: 0;
+  /* Espaçamento largo para estilo "terminal militar" */
+  letter-spacing: 8px; 
+  text-transform: uppercase;
+  color: #0f0;
+
+  /* Simula emissão de luz (efeito neon):
+     - camadas progressivas de blur
+     - última camada com opacidade reduzida para suavização
+  */
+  text-shadow: 
+    0 0 5px #0f0,
+    0 0 10px #0f0,
+    0 0 20px #0f0,
+    0 0 40px rgba(0, 255, 0, 0.6);
+
+  /* Animação contínua de piscar (`flicker`) para imitar instabilidade de tensão */
+  animation: flicker 1.8s infinite alternate;
+
+  font-weight: bold;
+  line-height: 1.1;
+
+  /* Dica de performance: `will-change` avisa ao navegador que essas propriedades
+     serão animadas com frequência — útil para evitar layout thrashing. */
+  will-change: opacity, text-shadow;
+}
+
+/* 
+  Efeito de *glitch* (falha digital) ao passar o mouse:
+  - deslocamento rápido + distorção (`skewX`)
+  - duração curta (0.5s) com curva de animação suave nos extremos
+  - `both` mantém o estado final para evitar "salto" ao finalizar
+*/
+.logo h1:hover {
+  animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* 
+  CONTAINER DOS BOTÕES
+  Layout vertical com espaçamento uniforme. Margem superior garante separação visual
+  entre logo e ações principais.
+*/
+.menu-btns {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* 
+  ESTILO BASE DOS BOTÕES
+  Design "pressionável", com inversão de cores no hover, brilho interno animado
+  e feedback tátil no `:active`. Foco acessível via `outline` visível apenas quando necessário.
+*/
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 60px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration: none;
+  /* Texto preto sobre fundo brilhante para alto contraste */
+  color: #000; 
+  /* Verde neon */
+  background: #0f0; 
+  border: none;
+  /* Corte reto — estilo "console militar" */
+  border-radius: 0; 
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+
+  /* Necessário para o efeito de brilho do ::before não vazar nas bordas */
+  overflow: hidden;
+
+  cursor: pointer;
+
+  /* Sombra difusa verde para simular emissão de luz */
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.7);
+
+  /* Transição suave para todos os estados interativos */
+  transition: all 0.25s ease;
+
+  /* Otimização: indica ao navegador quais propriedades mudarão com frequência */
+  will-change: transform, box-shadow, background-color;
+
+  /* Acessibilidade: `outline` apenas quando focado via teclado (`:focus-visible`) */
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+}
+
+/* 
+  Estado de foco (acessível via teclado):
+  - contorno verde visível
+  - reforço da sombra para indicar seleção ativa
+*/
+.btn:focus-visible {
+  outline-color: #0f0;
+  box-shadow: 
+    0 0 0 4px rgba(0, 255, 0, 0.3),
+    0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+/* 
+  BRILHO ANIMADO DO BOTÃO (efeito de "varredura de luz" no hover)
+  - Gradiente horizontal translúcido que se move da esquerda para a direita
+  - Inicia fora do elemento (`left: -100%`) e termina totalmente fora (`left: 100%`)
+  - `pointer-events: none` evita interferência com cliques
+*/
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6), /* Pico de brilho */
+    transparent
+  );
+  transition: left 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* 
+  ESTADO HOVER: inversão de cores + escala suave + intensificação da sombra
+  - Simula botão "desativado" (fundo transparente, borda implícita via sombra)
+  - `scale(1.03)` dá sensação de "erguer"
+*/
+.btn:hover {
+  background: transparent;
+  color: #0f0;
+  transform: scale(1.03);
+  box-shadow: 
+    /* Sombra mais intensa */
+    0 0 15px rgba(0, 255, 0, 0.9),   
+    /* Camada difusa externa */
+    0 0 30px rgba(0, 255, 0, 0.4);  
+}
+
+/* 
+  Ativação do brilho no hover: dispara a varredura do ::before
+*/
+.btn:hover::before {
+  left: 100%;
+}
+
+/* 
+  ESTADO ATIVO (`:active`): compressão visual + escurecimento
+  - `scale(0.98)` simula pressão física
+  - `#0a0` é um verde mais escuro para feedback tátil
+*/
+.btn:active {
+  transform: scale(0.98);
+  background: #0a0;
+}
+
+/* 
+  BOTÃO DE SAÍDA (destaque visual com cor vermelha de alerta)
+  Mantém consistência de interações (hover, focus, active), mas com identidade própria.
+*/
+.btnSair {
+  background: #ff0040; /* Vermelho neon intenso */
+  color: #000;
+  box-shadow: 0 0 12px rgba(255, 0, 64, 0.7);
+}
+
+.btnSair:hover {
+  background: transparent;
+  color: #ff0040;
+  box-shadow: 
+    0 0 15px rgba(255, 0, 64, 0.9),
+    0 0 30px rgba(255, 0, 64, 0.4);
+}
+
+.btnSair:active {
+  /* Vermelho mais escuro */
+  background: #cc0033; 
+}
+
+.btnSair:focus-visible {
+  outline-color: #ff0040;
+  box-shadow: 
+    0 0 0 4px rgba(255, 0, 64, 0.3),
+    0 0 15px rgba(255, 0, 64, 0.8);
+}
+
+/* 
+  EFEITO CRT: LINHAS DE VARREDURA (SCANLINES)
+  Camada superior (`z-index: 3`) com listras horizontais semi-transparentes.
+  Animação `scan` move as listras de cima para baixo, simulando varredura do feixe
+  de um monitor CRT antigo (refresh rate ~15Hz).
+  `pointer-events: none` garante que não bloqueie cliques.
+*/
+.scanline {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    /* Espaço vazio */
+    transparent 1px,             
+    /* Linha fina esverdeada */
+    rgba(0, 255, 0, 0.02) 1px,  
+    /* Altura da "scanline" */
+    rgba(0, 255, 0, 0.02) 2px   
+  );
+  pointer-events: none;
+  z-index: 3;
+  /* Movimento contínuo e suave */
+  animation: scan 8s linear infinite; 
+  /* Otimiza animação da posição */
+  will-change: background-position;   
+}
+
+/* 
+  ================
+  ANIMAÇÕES
+  ================
+*/
+
+/* 
+  @keyframes flicker
+  Simula instabilidade de fonte de alimentação em displays antigos:
+  - Piscadas aleatórias (baseadas em análise de vídeos reais de glitch)
+  - Redução temporária de opacidade + diminuição do brilho (`text-shadow`)
+*/
+@keyframes flicker {
+  0%, 18%, 22%, 24%, 26%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 5px #0f0,
+      0 0 10px #0f0,
+      0 0 20px #0f0,
+      0 0 40px rgba(0, 255, 0, 0.5);
+  }
+  20%, 25%, 55% {
+    opacity: 0.6;
+    /* Brilho mínimo */
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3); 
+  }
+}
+
+/* 
+  @keyframes glitch
+  Efeito de falha digital estilizada:
+  - Deslocamentos horizontais/verticais aleatórios
+  - Distorção angular (`skewX`) para simular corrupção de sinal
+  - Duração curta para impacto visual rápido
+*/
+@keyframes glitch {
+  0%   { transform: translate(0) skewX(0); }
+  20%  { transform: translate(-4px, 2px) skewX(-2deg); }
+  40%  { transform: translate(-4px, -2px) skewX(2deg); }
+  60%  { transform: translate(4px, 2px) skewX(2deg); }
+  80%  { transform: translate(4px, -2px) skewX(-2deg); }
+  100% { transform: translate(0) skewX(0); }
+}
+
+/* 
+  @keyframes scan
+  Movimento contínuo das scanlines de cima para baixo.
+  - `background-position: 0 100vh` desloca o gradiente em 1 viewport height
+  - Duração de 8s para velocidade realista (evita distração)
+*/
+@keyframes scan {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+/* 
+  ================
+  RESPONSIVIDADE
+  ================
+*/
+
+/* 
+  Dispositivos móveis (até 480px):
+  - Ajuste de escala da logo para evitar overflow
+  - Botões levemente reduzidos
+  - Espaçamento otimizado para toque
+*/
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 2rem;
+    /* Reduzido para melhor legibilidade em pequenas telas */
+    letter-spacing: 2px; 
+  }
+
+  .menu-btns {
+    /* Espaçamento menor, mas ainda confortável para toque */
+    gap: 1rem; 
+  }
+
+  .btn {
+    width: 240px;
+    height: 55px;
+    font-size: 1.15rem;
+    /* Centralização pura via flex (já está definido no pai) */
+    padding: 0; 
+  }
+}
+
+/* 
+  Tablets (481px a 768px):
+  - Tamanhos intermediários para melhor proporção visual
+  - Mantém estilo "desktop" com ajustes sutis
+*/
+@media (min-width: 481px) and (max-width: 768px) {
+  .logo h1 {
+    font-size: 2.8rem;
+    letter-spacing: 4px;
+  }
+
+  .btn {
+    width: 260px;
+    height: 58px;
+    font-size: 1.25rem;
+  }
+}

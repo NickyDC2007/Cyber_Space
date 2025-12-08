@@ -1,0 +1,444 @@
+/* 
+  ================================================================
+  AREA DE TRABALHO CSS MODULE (Tela Principal) 
+  ================================================================
+*/
+
+:root {
+  /* Cores do Tema */
+  --color-neon-green: #00ff41;
+  --color-dark-green: #008000;
+  --color-black: #000;
+  --color-dark-bg: rgba(0, 0, 0, 0.95);
+  --color-highlight-text: white;
+  --color-error: red;
+
+  /* Fontes */
+  --font-terminal: 'Consolas', 'Courier New', monospace;
+
+  /* Efeitos */
+  --shadow-neon: 0 0 10px var(--color-neon-green);
+  --shadow-icon: 0 0 8px rgba(0, 255, 0, 0.6);
+
+  /* Dimensões */
+  --footer-height: 30px;
+}
+
+/* === AREA DE TRABALHO (Container Principal) === */
+
+.areaDeTrabalho {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-terminal);
+  background-color: var(--color-black);
+}
+
+.area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* === FUNDO WALLPAPER (Imagem de Fundo) === */
+
+.fundoWallpaper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 97%;
+  object-fit: cover;
+  z-index: 1;
+  /* Escurece e adiciona saturação para o tema Matrix */
+  filter: brightness(0.8) saturate(1.1) hue-rotate(10deg);
+}
+
+/* Sobreposição de tela escura para garantir o contraste do texto */
+.areaDeTrabalho::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+/* === ÍCONES NA DIREITA SUPERIOR === */
+
+.app {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  z-index: 2;
+}
+
+.appMissoes,
+.appBiblioteca {
+  padding-left: 17px;
+  padding-right: 17px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.appMissoes img,
+.appBiblioteca img {
+  width: 140%;
+  height: 140%;
+  object-fit: contain;
+}
+
+.appMissoes:hover,
+.appBiblioteca:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2) drop-shadow(0 0 4px var(--color-neon-green));
+  border: 2px dotted #00ff41;
+}
+
+/* ================================================================= */
+/* BARRA INFERIOR (FooterBar/Taskbar) */
+/* ================================================================= */
+
+.footerBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--color-neon-green);
+  border-top: 2px solid var(--color-neon-green);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1000;
+  font-weight: bold;
+  color: var(--color-highlight-text);
+  font-size: 14px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logout {
+  /* Estilo do botão "Logout" */
+  background-color: var(--color-neon-green);
+  color: var(--color-black);
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  border: 2px solid var(--color-neon-green);
+}
+
+.logout:hover {
+  background-color: #00d535;
+  border: 2px solid var(--color-neon-green);
+  border-radius: 7px;
+  box-shadow: 0 0 8px var(--color-neon-green);
+}
+
+.logout img {
+  width: 20px;
+}
+
+/* === BARRA DE TAREFAS (TaskBar) === */
+
+.taskBar {
+  display: flex;
+  gap: 8px;
+}
+
+.taskBarItem {
+  background-color: var(--color-black);
+  color: #00d535;
+  border: 2px solid var(--color-black);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-family: var(--font-terminal);
+  font-size: 0.9em;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 255, 65, 0.7);
+  transition: background-color 0.2s;
+}
+
+.taskBarItem.minimized {
+  background-color: #00d535;
+  border: 2px solid var(--color-black);
+  border-radius: 5px;
+  color: var(--color-black);
+  box-shadow: 0 0 5px var(--color-neon-green);
+}
+
+/* ================================================================= */
+/* ESTILOS PARA A JANELA POP-UP (MiniJanela) */
+/* ================================================================= */
+
+.miniJanela {
+  /* Propriedades para permitir o arraste */
+  position: absolute;
+  z-index: 1000;
+  user-select: none;
+  will-change: transform;
+
+  /* Tema visual */
+  width: 600px;
+  min-height: 200px;
+  border: 2px solid var(--color-neon-green);
+  background-color: var(--color-dark-bg);
+  color: var(--color-neon-green);
+  box-shadow: var(--shadow-neon);
+  font-family: var(--font-terminal);
+  padding: 0;
+}
+
+.miniJanelaHeader {
+  background-color: var(--color-neon-green);
+  color: var(--color-black);
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: grabbing;
+}
+
+.miniJanelaMinimizada {
+  background: none;
+  border: 1px solid var(--color-neon-green);
+  color: var(--color-black);
+  cursor: pointer;
+  padding: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 4px;
+  line-height: 1;
+  font-weight: 1000;
+  transition: background-color 0.2s;
+}
+
+.miniJanelaMinimizada:hover {
+  background-color: #83ffa2;
+  border: 1px solid #8affa7;
+  border-radius: 4px;
+  color: var(--color-black);
+}
+
+.miniJanelaFechada {
+  background: none;
+  border: 1px solid var(--color-neon-green);
+  color: var(--color-black);
+  cursor: pointer;
+  padding: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 4px;
+  line-height: 1.2;
+  font-weight: 1000;
+  transition: background-color 0.2s;
+}
+
+.miniJanelaFechada:hover {
+  background-color: #83ffa2;
+  border: 1px solid #8affa7;
+  border-radius: 4px;
+  color: var(--color-black);
+}
+
+.miniJanelaContent {
+  padding: 15px;
+  cursor: auto;
+}
+
+/* ================================================================= */
+/* ANIMACAO DE MINIMIZAÇÃO */
+/* ================================================================= */
+
+@keyframes minimize-out {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+
+  /* ESTÁGIO INTERMEDIÁRIO: Reduz a opacidade e adiciona um leve desfoque */
+  50% {
+    opacity: 0.4;
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(3px);
+    visibility: hidden;
+  }
+}
+
+/* ================================================================= */
+/* APLICAÇÃO DA ANIMAÇÃO */
+/* ================================================================= */
+
+.miniJanelaMinimized {
+  animation: minimize-out 0.6s ease-out forwards;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.miniJanela:not(.miniJanelaMinimized) {
+  z-index: 1000;
+}
+
+/* ================================================================= */
+/* MEDIA QUERY: Dispositivos Móveis (Celulares) */
+/* ================================================================= */
+@media (max-width: 600px) {
+
+  :root {
+    /* Reduz a altura do rodapé no celular */
+    --footer-height: 40px;
+  }
+
+  /* Remove a sobreposição escura para evitar z-index issues em alguns navegadores móveis */
+  .areaDeTrabalho::after {
+    display: none;
+  }
+
+  /* === ÍCONES NA DIREITA SUPERIOR (Movido para a Esquerda e Vertical) === */
+  .app {
+    /* Move para o canto superior esquerdo */
+    top: 15px;
+    left: 15px;
+    right: auto;
+
+    /* Layout em coluna */
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .appMissoes,
+  .appBiblioteca {
+    /* Reduz ainda mais o tamanho */
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    /* Alinha texto do ícone à esquerda, se houver */
+    align-items: flex-start;
+  }
+
+  .appMissoes img,
+  .appBiblioteca img {
+    /* Garante que a imagem se ajuste bem */
+    width: 100%;
+    height: 100%;
+  }
+
+  /* === BARRA INFERIOR (FooterBar) === */
+  .footerBar {
+    height: var(--footer-height);
+    padding: 0 8px;
+    /* Reduz o padding horizontal */
+    font-size: 12px;
+    /* Reduz o tamanho da fonte */
+  }
+
+  /* Botão Logout */
+  .logout {
+    padding: 3px 8px;
+    margin-right: 10px;
+  }
+
+  .logout img {
+    width: 16px;
+    /* Reduz o tamanho do ícone */
+  }
+
+  /* Barra de Tarefas */
+  .taskBar {
+    gap: 4px;
+    /* Reduz o espaçamento entre itens */
+    overflow-x: auto;
+    /* Permite rolar se houver muitas tarefas */
+    white-space: nowrap;
+    /* Impede que os itens quebrem a linha */
+  }
+
+  .taskBarItem {
+    font-size: 0.75em;
+    padding: 2px 5px;
+  }
+
+  /* ================================================================= */
+  /* ESTILOS PARA A JANELA POP-UP (MiniJanela) */
+  /* ================================================================= */
+
+  .miniJanela {
+    /* Propriedades para permitir o arraste */
+    position: absolute;
+    z-index: 1000;
+    user-select: none;
+    will-change: transform;
+
+    /* Tema visual */
+    /* Diminua o 'width' (por exemplo, de 600px para 350px) */
+    width: 350px;
+    /* Diminua o 'min-height' (por exemplo, de 200px para 150px) */
+    min-height: 150px;
+
+    border: 2px solid var(--color-neon-green);
+    background-color: var(--color-dark-bg);
+    color: var(--color-neon-green);
+    box-shadow: var(--shadow-neon);
+    font-family: var(--font-terminal);
+    padding: 0;
+  }
+
+  /* ================================================================= */
+  /* MEDIA QUERY: Dispositivos Móveis (Celulares) */
+  /* ================================================================= */
+  @media (max-width: 600px) {
+    /* ... outros ajustes ... */
+
+    /* Janela Pop-up */
+    .miniJanela {
+      /* Ocupa uma porcentagem menor da largura da tela */
+      width: 85vw;
+      /* Centraliza a janela, considerando a nova largura */
+      left: 7.5vw !important;
+      top: 5vh !important;
+      /* Garante que mesmo no celular ela seja pequena */
+      max-width: 350px;
+    }
+
+    /* ... outros ajustes ... */
+  }
+
+  .miniJanelaHeader {
+    padding: 4px 8px;
+    /* Reduz o padding do cabeçalho */
+  }
+
+  .miniJanelaContent {
+    padding: 10px;
+    /* Reduz o padding do conteúdo */
+  }
+}
