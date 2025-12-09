@@ -6,12 +6,9 @@ import MenuInicial from './components/pages/MenuInicial/MenuInicial';
 import AreaTrabalho from './components/pages/AreaTrabalho/AreaTrabalho';
 import CenaFinal from './components/pages/CenaFinal/CenaFinal';
 
-import Navbar from './components/layout/navbar';
-
 function App() {
   return (
     <Router>
-      <Navbar></Navbar>
       <Routes>
 
         {/* Menu Inicial */}

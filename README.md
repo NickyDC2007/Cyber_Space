@@ -1,75 +1,81 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# 🌌 CYBER SPACE: O Jogo Interativo de Criptografia em React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 Visão Geral do Projeto
 
-## Available Scripts
+**Cyber Space** é um jogo interativo desenvolvido em **React** para ensinar conceitos de **criptografia** de forma prática e divertida. O jogador é imerso em um ambiente digital futurista, onde enfrenta desafios baseados em cifras reais e deve resolver enigmas que representam técnicas usadas no mundo da segurança da informação.
 
-In the project directory, you can run:
+O jogo utiliza um design de interface de sistema operacional (Desktop Environment) com janelas e aplicativos arrastáveis para criar uma experiência imersiva de quebra de códigos.
+
+### 📚 Funcionalidades Principais
+
+* **Ambiente de Desktop Imersivo**: Interface simulando um sistema operacional (`AreaDeTrabalho`) com ícones, barra de tarefas e wallpapers.
+* **Janelas Arrastáveis e Animadas**: Componente `MiniJanela` que permite arrastar, fechar e minimizar janelas com uma animação de "voo" para a barra de tarefas.
+* **Módulos Educacionais**: O componente `ConteudoBiblioteca` oferece material de estudo detalhado sobre cifras históricas (Cifra de César, Vigenère, Enigma) e modernas (ECC).
+* **Missões Interativas**: O componente `ConteudoMissoes` apresenta enigmas que exigem a aplicação dos conhecimentos de criptografia para decifrar a senha de acesso.
+
+---
+
+## 💻 Tecnologias Envolvidas
+
+Este projeto foi inicializado com **Create React App** e utiliza:
+
+* **React** (com Hooks como `useState`, `useRef`, `useEffect`, `useMemo` para gerenciamento de estado e interatividade).
+* **React Router DOM** (para navegação entre o Menu e a Área de Trabalho).
+* **CSS Modules** (para modularização de estilos).
+* **Animações CSS**: Implementação de transformações (`translate`, `scale`) para animações de arrasto e minimização de janelas.
+
+---
+
+## 🛠️ Instalação e Execução
+
+Para rodar o projeto em sua máquina local, siga os passos abaixo:
+
+### Pré-requisitos
+
+Certifique-se de ter o **Node.js** e o **npm** (ou yarn) instalados.
+
+### Passos
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [LINK DO SEU REPOSITÓRIO]
+    cd cyber_space
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+3.  **Execute o aplicativo:**
+    ```bash
+    npm start
+    # ou
+    yarn start
+    ```
+
+O aplicativo será aberto automaticamente no seu navegador em [http://localhost:3000](http://localhost:3000). A página recarrega automaticamente quando você faz alterações nos arquivos.
+
+---
+
+## ⚙️ Scripts Disponíveis
+
+Na pasta do projeto, você pode executar os seguintes comandos:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Inicia o aplicativo em modo de desenvolvimento.
+Abre [http://localhost:3000](http://localhost:3000) no seu navegador.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o *test runner* em modo de observação interativo.
+Para mais informações, veja a documentação do [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Compila o aplicativo para produção na pasta `build`.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# cyber_space
-Cyber_space é um jogo interativo desenvolvido em React para ensinar conceitos de criptografia de forma prática e divertida. O jogador explora um ambiente digital futurista, enfrenta desafios baseados em cifras reais e resolve enigmas que representam técnicas usadas no mundo da segurança da informação.
->>>>>>> 73b734714df02723a59bf0f76b208b1a508e670d
+> **Aviso: Esta é uma operação irreversível.**

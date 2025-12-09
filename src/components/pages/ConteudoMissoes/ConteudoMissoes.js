@@ -13,6 +13,10 @@ import retornoImg from '../../../assets/Return.png';
 import A1Z26Img from '../../../assets/A1Z26.png';
 import IBM3Img from '../../../assets/3IBM.png';
 import SamuelImg from '../../../assets/Samuel-Morse.jpg'
+import luaImg from '../../../assets/Lua.png';
+import pilastraImg from '../../../assets/Pilastra.png';
+import chaveImg from '../../../assets/Chave.png';
+import Img303 from '../../../assets/303.jpg';
 
 // Senhas definidas para as missões
 const MISSAO_SENHAS = {
@@ -20,6 +24,10 @@ const MISSAO_SENHAS = {
     'missao2': 'N', 
     'missao3': 'COMPUTADOR', 
     'missao4': 'SAMUEL', 
+    'missao5': 'DCI', 
+    'missao6': 'MICROCOMPUTADORIZAÇÃO', 
+    'missao7': 'BYTE', 
+    'missao8': 'REACT',     
 };
 
 const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
@@ -31,7 +39,11 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
         missao1: false,
         missao2: false,
         missao3: false,
-        missao4: false, 
+        missao4: false,
+        missao5: false,
+        missao6: false,
+        missao7: false,
+        missao8: false, 
     });
 
     // HOOKS
@@ -61,10 +73,10 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
             setMissoesConcluidas(novasConclusoes);
             
             // Verifica se TODAS as missões (1, 2 e 3) foram concluídas
-            const missoesIniciaisConcluidas = novasConclusoes.missao1 && novasConclusoes.missao2 && novasConclusoes.missao3;
+            const missoesIniciaisConcluidas = novasConclusoes.missao1 && novasConclusoes.missao2 && novasConclusoes.missao3 && novasConclusoes.missao4 && novasConclusoes.missao5 && novasConclusoes.missao6 && novasConclusoes.missao7;
 
-            // Se for a Missao4, navega para a tela final após a conclusão.
-            if (missaoId === 'missao4') {
+            // Se for a missao8, navega para a tela final após a conclusão.
+            if (missaoId === 'missao8') {
                 setTimeout(() => {
                     setTelaAtiva('Final');
                 }, 1000);
@@ -90,49 +102,49 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
     };
     
     // Função para verificar se as missões iniciais estão concluídas
-    const allInitialMissoesCompleted = missoesConcluidas.missao1 && missoesConcluidas.missao2 && missoesConcluidas.missao3;
+    const todasMissoesCompletas = missoesConcluidas.missao1 && missoesConcluidas.missao2 && missoesConcluidas.missao3 && missoesConcluidas.missao4 && missoesConcluidas.missao5 && missoesConcluidas.missao6 && missoesConcluidas.missao7;
 
     // Função para renderizar um item de missão
-    const renderMissionItem = (id, nome, tela) => {
-        const isCompleted = missoesConcluidas[`missao${id}`];
-        const isClickable = !isCompleted;
+    const exemploMissao = (id, nome, tela) => {
+        const completada = missoesConcluidas[`missao${id}`];
+        const clicavel = !completada;
         
         // Estilo condicional
-        const itemClass = isCompleted 
+        const itemClass = completada 
             ? `${styles.missionItem} ${styles.completed}` 
-            : `${styles.missionItem} ${isClickable ? styles.active : ''}`;
+            : `${styles.missionItem} ${clicavel ? styles.active : ''}`;
 
         return (
             <li 
                 key={id} 
                 className={itemClass}
-                onClick={isClickable ? () => handleMissionClick(tela) : undefined}
+                onClick={clicavel ? () => handleMissionClick(tela) : undefined}
             >
                 [{id}00] {nome}
-                {isCompleted && <span className={styles.completedTag}> ✅ </span>}
+                {completada && <span className={styles.completedTag}> ✅ </span>}
             </li>
         );
     };
 
     // Função para renderizar o item da Missão 4 (Desbloqueável)
-    const renderMission4Item = () => {
-        const isCompleted = missoesConcluidas.missao4;
-        const isClickable = allInitialMissoesCompleted && !isCompleted;
+    const exemploMissaoFinal = () => {
+        const completada = missoesConcluidas.missao8;
+        const clicavel = todasMissoesCompletas && !completada;
         
         // Estilo condicional
-        const itemClass = isClickable 
+        const itemClass = clicavel 
             ? `${styles.missionItem} ${styles.active} ${styles.mission4}` 
             : `${styles.missionItem} ${styles.locked}`;
             
-        const text = allInitialMissoesCompleted 
-            ? (isCompleted ? '[400] Acesso ao Núcleo ✅' : '[400] Acesso ao Núcleo')
-            : '[400] ??? ';
+        const text = todasMissoesCompletas 
+            ? (completada ? '[800] Acesso ao Núcleo ✅' : '[800] Acesso ao Núcleo')
+            : '[800] ??? ';
 
         return (
             <li 
-                key="4" 
+                key="9" 
                 className={itemClass}
-                onClick={isClickable ? () => setTelaAtiva('Missao4') : undefined}
+                onClick={clicavel ? () => setTelaAtiva('missao8') : undefined}
             >
                 {text}
             </li>
@@ -155,12 +167,16 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
                 {/* Feedback para o caso de tentar entrar em missão concluída */}
                 {feedback && <p className={styles.feedbackText}>{feedback}</p>} 
                 <ul className={styles.listMissoes}>
-                    {renderMissionItem(1, 'Rastreamento Neural', 'Missao1')}
-                    {renderMissionItem(2, 'Servidores Centrais', 'Missao2')}
-                    {renderMissionItem(3, 'Câmeras de Vigilância', 'Missao3')}
+                    {exemploMissao(1, 'Rastreamento Neural', 'Missao1')}
+                    {exemploMissao(2, 'Servidores Centrais', 'Missao2')}
+                    {exemploMissao(3, 'Câmeras de Vigilância', 'Missao3')}
+                    {exemploMissao(4, 'Varredura Digital', 'Missao4')}
+                    {exemploMissao(5, 'Escudos de Firewall', 'Missao5')}
+                    {exemploMissao(6, 'Sensores Fantasma', 'Missao6')}
+                    {exemploMissao(7, 'Malha de Drones', 'Missao7')}
 
-                    {/* Item da Missão 4 (Desbloqueada) */}
-                    {renderMission4Item()}
+                    {/* Item da Missão Final */}
+                    {exemploMissaoFinal()}
                 </ul>
             </>
         ),
@@ -190,7 +206,7 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
                         className={styles.senhaInput}
                         value={senhaInput}
                         onChange={handleSenhaChange}
-                        maxLength={20}
+                        maxLength={30}
                         disabled={missoesConcluidas.missao1} // Desabilita input após conclusão
                     />
                     <button
@@ -231,7 +247,7 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
                         className={styles.senhaInput}
                         value={senhaInput}
                         onChange={handleSenhaChange}
-                        maxLength={20}
+                        maxLength={30}
                         disabled={missoesConcluidas.missao2}
                     />
                     <button
@@ -272,7 +288,7 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
                         className={styles.senhaInput}
                         value={senhaInput}
                         onChange={handleSenhaChange}
-                        maxLength={20}
+                        maxLength={30}
                         disabled={missoesConcluidas.missao3}
                     />
                     <button
@@ -287,9 +303,8 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
 
             </div>
         ),
-    
         'Missao4': (
-            // Layout da Missão 4 (Acesso ao Núcleo - SAMUEL)
+            // Layout da Missão 4 (Varredura Digital - SAMUEL)
 
             <div className={styles.missaoContainer}>
                 <div className={styles.headingContainer}>
@@ -314,13 +329,177 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
                         className={styles.senhaInput}
                         value={senhaInput}
                         onChange={handleSenhaChange}
-                        maxLength={20}
+                        maxLength={30}
                         disabled={missoesConcluidas.missao4}
                     />
                     <button
                         className={styles.senhaButton}
                         onClick={() => handleTentativaSenha('missao4')}
                         disabled={missoesConcluidas.missao4}
+                    >
+                        ACESSAR NÚCLEO
+                    </button>
+                    <p className={styles.feedbackText}>{feedback}</p>
+                </div>
+
+            </div>
+        ),
+        'Missao5': (
+            // Layout da Missão 5 (Escudos de Firewall - DCI)
+
+            <div className={styles.missaoContainer}>
+                <div className={styles.headingContainer}>
+                    <img src={retornoImg} alt="Retorno" className={styles.img} onClick={() => setTelaAtiva('Menu')}/>
+                    <h2 className={styles.heading}>[SII]</h2>
+                </div>
+
+                <div className={styles.missao1Container}>
+                    <img src={luaImg} alt="Lua" className={styles.img} />
+                </div>
+                
+                <div className={styles.desafioText}>
+                    <p>
+                        “la chiffre indéchiffrable”
+                    </p>
+                </div>
+                
+                <div className={styles.senhaBlock}>
+                    <input
+                        type="text"
+                        placeholder="INSERIR CÓDIGO"
+                        className={styles.senhaInput}
+                        value={senhaInput}
+                        onChange={handleSenhaChange}
+                        maxLength={30}
+                        disabled={missoesConcluidas.missao5}
+                    />
+                    <button
+                        className={styles.senhaButton}
+                        onClick={() => handleTentativaSenha('missao5')}
+                        disabled={missoesConcluidas.missao5}
+                    >
+                        TENTAR ACESSO
+                    </button>
+                    <p className={styles.feedbackText}>{feedback}</p>
+                </div>
+
+            </div>
+        ),
+        'Missao6': (
+            // Layout da Missão 6 (Sensores Fantasma - MICROCOMPUTADORIZAÇÃO)
+
+            <div className={styles.missaoContainer}>
+                <div className={styles.headingContainer}>
+                    <img src={retornoImg} alt="Retorno" className={styles.img} onClick={() => setTelaAtiva('Menu')}/>
+                    <h2 className={styles.heading}>[6??]</h2>
+                </div>
+
+                <div className={styles.missao1Container}>
+                    <img src={pilastraImg} alt="Coluna" className={styles.img} />
+                </div>
+                
+                <div className={styles.desafioText}>
+                    <p>
+                        moircirzoacçoãmoputad
+                    </p>
+                </div>
+                
+                <div className={styles.senhaBlock}>
+                    <input
+                        type="text"
+                        placeholder="INSERIR CÓDIGO"
+                        className={styles.senhaInput}
+                        value={senhaInput}
+                        onChange={handleSenhaChange}
+                        maxLength={30}
+                        disabled={missoesConcluidas.missao6}
+                    />
+                    <button
+                        className={styles.senhaButton}
+                        onClick={() => handleTentativaSenha('missao6')}
+                        disabled={missoesConcluidas.missao6}
+                    >
+                        TENTAR ACESSO
+                    </button>
+                    <p className={styles.feedbackText}>{feedback}</p>
+                </div>
+
+            </div>
+        ),
+        'Missao7': (
+            // Layout da Missão 7 (Malha de Drones - BYTE)
+
+            <div className={styles.missaoContainer}>
+                <div className={styles.headingContainer}>
+                    <img src={retornoImg} alt="Retorno" className={styles.img} onClick={() => setTelaAtiva('Menu')}/>
+                    <h2 className={styles.heading}>[717]</h2>
+                </div>
+
+                <div className={styles.missao1Container}>
+                    <img src={chaveImg} alt="chave" className={styles.img} />
+                </div>
+                
+                <div className={styles.desafioText}>
+                    <p>
+                        N + OZRX
+                    </p>
+                </div>
+                
+                <div className={styles.senhaBlock}>
+                    <input
+                        type="text"
+                        placeholder="INSERIR CÓDIGO"
+                        className={styles.senhaInput}
+                        value={senhaInput}
+                        onChange={handleSenhaChange}
+                        maxLength={30}
+                        disabled={missoesConcluidas.missao7}
+                    />
+                    <button
+                        className={styles.senhaButton}
+                        onClick={() => handleTentativaSenha('missao7')}
+                        disabled={missoesConcluidas.missao7}
+                    >
+                        TENTAR ACESSO
+                    </button>
+                    <p className={styles.feedbackText}>{feedback}</p>
+                </div>
+
+            </div>
+        ),
+        'missao8': (
+            // Layout da Missão 8 (Acesso ao Núcleo - REACT)
+
+            <div className={styles.missaoContainer}>
+                <div className={styles.headingContainer}>
+                    <img src={retornoImg} alt="Retorno" className={styles.img} onClick={() => setTelaAtiva('Menu')}/>
+                    <h2 className={styles.heading}>[821]</h2>
+                </div>
+                
+                <div className={styles.missao1Container}>
+                    <img src={Img303} alt="303" className={styles.img} />
+                </div>
+
+                <div className={styles.desafioText}>
+                    <p>
+                        ·· ···– ·–· – –·–
+                    </p>
+                </div>
+                
+                <div className={styles.senhaBlock}>
+                    <input
+                        type="text"
+                        placeholder="CÓDIGO FINAL"
+                        className={styles.senhaInput}
+                        value={senhaInput}
+                        onChange={handleSenhaChange}
+                        maxLength={30}
+                        disabled={missoesConcluidas.missao8}
+                    />
+                    <button
+                        className={styles.senhaButton}
+                        onClick={() => handleTentativaSenha('missao8')}
+                        disabled={missoesConcluidas.missao8}
                     >
                         ACESSAR NÚCLEO
                     </button>
