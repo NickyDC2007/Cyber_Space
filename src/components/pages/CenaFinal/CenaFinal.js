@@ -4,7 +4,6 @@
   ================
 */
 
-import { Link } from 'react-router-dom';
 import styles from '../../../styles/MenuInicial.module.css';
 import MatrixBackground from '../MenuInicial/MatrixBackground.jsx';
 

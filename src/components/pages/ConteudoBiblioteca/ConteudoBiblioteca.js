@@ -84,7 +84,7 @@ const ConteudoBiblioteca = ({ telaAtiva, setTelaAtiva }) => {
                 <p key={index} className={styles.exLinha}>
                     <b>{linha.label}:</b> {
                         linha.label === 'Curva' 
-                            ? <span>$y^2 = x^3 + x + 6 \pmod{11}$</span>
+                            ? <span>$y^2 = x^3 + x + 6 mod{11}$</span>
                             : linha.value
                     }
                 </p>
@@ -315,7 +315,7 @@ R _ _ _`}
                 <BlocoExemplo 
                     titulo="Exemplo"
                     linhas={[
-                        { label: 'Curva', value: '$y^2 = x^3 + x + 6 \pmod{11}$' },
+                        { label: 'Curva', value: '$y^2 = x^3 + x + 6 mod{11}$' },
                         { label: 'Chave privada', value: '5' },
                         { label: 'Ponto base (G)', value: '(2, 7)' },
                     ]}

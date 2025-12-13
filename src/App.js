@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import MenuInicial from './components/pages/MenuInicial/MenuInicial';
 import AreaTrabalho from './components/pages/AreaTrabalho/AreaTrabalho';

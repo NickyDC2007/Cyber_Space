@@ -134,11 +134,6 @@ const AreaDeTrabalho = () => {
       const config = JANELAS[chave];
       const estado = estadoJanelas[chave];
 
-      let posicaoDestino = null;
-      if (estado.estaMinimizada) {
-         
-      }
-
       // Conteúdo específico da janela
       let conteudoJanela;
       if (chave === 'missoes') {

@@ -72,9 +72,6 @@ const ConteudoMissoes = ({ telaAtiva, setTelaAtiva }) => {
             const novasConclusoes = { ...missoesConcluidas, [missaoId]: true };
             setMissoesConcluidas(novasConclusoes);
             
-            // Verifica se TODAS as missões (1, 2 e 3) foram concluídas
-            const missoesIniciaisConcluidas = novasConclusoes.missao1 && novasConclusoes.missao2 && novasConclusoes.missao3 && novasConclusoes.missao4 && novasConclusoes.missao5 && novasConclusoes.missao6 && novasConclusoes.missao7;
-
             // Se for a missao8, navega para a tela final após a conclusão.
             if (missaoId === 'missao8') {
                 setTimeout(() => {
