@@ -1,0 +1,115 @@
+/*
+ * Adicione ou modifique estas classes em seu MenuInicial.module.css
+ * para estilizar a 'Cena Final' (Certifique-se de que .menu-inicial,
+ * .scanline e .menu já tenham seus estilos básicos de layout Matrix
+ * definidos, como posicionamento absoluto/fixo, cores de fundo, etc.)
+ */
+
+/*
+ * Estilo do Container Principal (Se ainda não estiver definido)
+ */
+.menu-inicial {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Pode ter um background-color: black; se o MatrixBackground não cobrir */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+ * Camada de Scanline (Se ainda não estiver definida)
+ */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 1px,
+        rgba(0, 255, 65, 0.1) 2px,
+        rgba(0, 255, 65, 0.1) 3px
+    );
+    opacity: 0.2; /* Ajuste a opacidade para o efeito de TV antiga */
+}
+
+/*
+ * Quadro principal do menu (Ajustado para centralizar o conteúdo)
+ */
+.menu {
+    position: relative; /* Para ficar acima do fundo da Matrix */
+    z-index: 10;
+    width: 80%; /* Ajuste conforme necessário */
+    max-width: 600px;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.85); /* Fundo escuro semi-transparente */
+    border: 2px solid #00ff41; /* Borda Matrix */
+    box-shadow: 0 0 20px #00ff41; /* Brilho Matrix */
+
+    /* Estilos para centralizar o conteúdo da cena final */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 40px; /* Espaço entre o título e o QR Code */
+}
+
+/*
+ * Estilo para o Título (dentro da classe .logo)
+ * Você tem um h1 dentro de .logo, então estilize o h1.
+ */
+.logo h1 {
+    color: #00ff41; /* Verde Matrix */
+    text-shadow: 0 0 10px #00ff41, 0 0 20px rgba(0, 255, 65, 0.7);
+    font-family: 'Matrix', monospace; /* Use uma fonte estilo Matrix se tiver, senão monospace */
+    font-size: 3.5em; /* Tamanho grande para destaque */
+    margin: 0; /* Remove margens padrão */
+    line-height: 1.1;
+}
+
+/*
+ * Container do QR Code (Classe .qr)
+ */
+.qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #00ff41;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Fundo sutil */
+}
+
+/*
+ * Estilo para a imagem do QR Code (Classe .img)
+ */
+.img {
+    width: 180px; /* Tamanho do QR Code */
+    height: 180px;
+    object-fit: contain; /* Garante que a imagem se ajuste */
+    filter: invert(1) hue-rotate(120deg) brightness(1.5) contrast(2); /* Tenta dar um toque verde ao QR Code */
+}
+
+/*
+ * Opcional: Efeito de falha (Glitch) no título
+ */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.logo h1:hover {
+    animation: glitch 0.2s linear infinite;
+}
