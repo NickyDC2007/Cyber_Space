@@ -1,13 +1,9 @@
-/*
- * Adicione ou modifique estas classes em seu MenuInicial.module.css
- * para estilizar a 'Cena Final' (Certifique-se de que .menu-inicial,
- * .scanline e .menu já tenham seus estilos básicos de layout Matrix
- * definidos, como posicionamento absoluto/fixo, cores de fundo, etc.)
- */
+/* 
+  ================================================================
+  CENA FINAL CSS MODULE (FINAL)
+  ================================================================
+*/
 
-/*
- * Estilo do Container Principal (Se ainda não estiver definido)
- */
 .menu-inicial {
     position: fixed;
     top: 0;
