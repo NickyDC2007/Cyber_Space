@@ -18,7 +18,7 @@ import pilastraImg from '../../../assets/Pilastra.png';
 import chaveImg from '../../../assets/Chave.png';
 import Img303 from '../../../assets/303.jpg';
 
-// Senhas definidas para as missões
+// Senhas definidas para as missões 
 const MISSAO_SENHAS = {
     'missao1': 'GIRL', 
     'missao2': 'N', 
